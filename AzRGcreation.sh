@@ -1,4 +1,4 @@
-az login
+
 
 loc="CentralIndia"
 rg="Sharad-India"
