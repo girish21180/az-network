@@ -1,7 +1,7 @@
 az login
 
 loc="CentralIndia"
-rg="Girish-India"
+rg="Sharad-India"
 vnet="Hub-India"
 vnet1="Spoke-India"
 
@@ -37,55 +37,4 @@ az network vnet create \
     --subnet-prefixes 172.16.1.0/24 \
     --subnet-name Val
 
-az network vnet peering create \
-    --vnet-name Hub-India \
-    --name hubtospoke \
-    --remote-vnet Spoke-India \
-    --allow-vnet-access \
-    --allow-forwarded-traffic \
-    --allow-gateway-transit \
-    --resource-group Girish-India
 
-az network vnet peering create \
-    --vnet-name Spoke-India \
-    --name spoketohub \
-    --remote-vnet Hub-India \
-    --allow-vnet-access \
-    --allow-forwarded-traffic \
-    --allow-gateway-transit \
-    --resource-group Girish-India
-
-az vm create \
-	--resource-group Girish-India \
-	--name hub-VM \
-	--image win2012datacenter \
-	--vnet-name Hub-India \
-	--subnet Production \
-	--admin-username azuser \
-	--admin-password Covid@192021
-
-az vm create \
-	--resource-group Girish-India \
-	--name spoke-VM \
-	--image win2012datacenter \
-	--vnet-name Spoke-India \
-	--subnet val \
-	--admin-username azuser \
-	--admin-password Covid@192021
-
-az network public-ip create \
-    --name MyFWPIP \
-    --resource-group Girish-India \
-    --allocation-method static \
-    --sku standard
-
-az network firewall create \
-    --name MyFireWall \
-    --resource-group Girish-India
-
-az network firewall ip-config create \
-    --firewall-name MyFireWall \
-    --name MyFWIPConfig \
-    --public-ip-address MyFWPIP \
-    --resource-group Girish-India \
-    --vnet-name Hub-India    
